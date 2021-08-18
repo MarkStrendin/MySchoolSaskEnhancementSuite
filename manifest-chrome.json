@@ -11,7 +11,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*.myschoolsask.com/aspen/*"],
+      "matches": ["*://*.myschoolsask.com/aspen/*", "*://myschoolsask.ca/aspen/*"],
       "js": ["/thirdparty/jquery-3.3.1.min.js", "/js/myschoolsask.com.js"]
     }
   ],

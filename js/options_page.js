@@ -97,6 +97,18 @@ $("#chkHideYearofGraduationFields").on('change', function() {
   });
 });
 
+$("#chkEnableAASPSelect").on('change', function() {
+  chrome.storage.sync.set({
+    lSetAASPDropdown: document.querySelector("#chkEnableAASPSelect").checked
+  });
+});
+
+$("#txtAASPSchoolDiv").on('input', function() {
+  chrome.storage.sync.set({
+    sAASPDivNum: document.querySelector("#txtAASPSchoolDiv").value
+  });
+});
+
 $("#chkShowDebugOptions").on('change', function() {
   var lShowDebugOptions = document.querySelector("#chkShowDebugOptions").checked || false;
   if (lShowDebugOptions == true) {
@@ -126,6 +138,8 @@ $("#btnResetSettingsToDefault").on('click', function() {
         lShowYOGGradeDropdowns: true,
         lHideYOGRow: false,
         lEnableCheckboxMultiSelect: true,
+        lSetAASPDropdown: false,
+        sAASPDivNum: ""
   });
   location.reload();
 });
@@ -178,6 +192,20 @@ function checkDefaultSettings(settings) {
         lEnableCheckboxMultiSelect: true
       });
   }
+
+  if (settings.lSetAASPDropdown == null) {
+    logMsg("Defaulting new setting \"lSetAASPDropdown\" to false");
+    chrome.storage.sync.set({
+        lSetAASPDropdown: false
+      });
+  }
+
+  if (settings.sAASPDivNum == null) {
+    logMsg("Defaulting new setting \"sAASPDivNum\" to ''");
+    chrome.storage.sync.set({
+        sAASPDivNum: ""
+      });
+  }
 }
 
 /// Visually updates the fields on the options page to match the stored settings, or the defauls
@@ -195,6 +223,10 @@ function onSyncSettingsLoaded(settings) {
   document.querySelector("#chkShowGradeDropdownOnRegWizard").checked = (settings.lShowYOGGradeDropdowns || false);
   document.querySelector("#chkHideYearofGraduationFields").checked = (settings.lHideYOGRow || false);
   document.querySelector("#chkHideYearofGraduationFields").disabled = !settings.lShowYOGGradeDropdowns;
+
+  // AASP 
+  document.querySelector("#chkEnableAASPSelect").checked = (settings.lSetAASPDropdown || false);
+  document.querySelector("#txtAASPSchoolDiv").value = (settings.sAASPDivNum || "");
 
   // Session timeouts
   switch(settings["sTimeoutOverrideMode"]) {

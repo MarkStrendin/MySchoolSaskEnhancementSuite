@@ -219,6 +219,17 @@ function hideYOGFields(settings) {
 	}
 }
 
+function setAASPDefault(settings) {
+	if (
+		(document.title.toLowerCase().includes("log on"))
+		) {
+		logMsg("Setting AASP drop down");
+
+		// Set the AASP dropdown to the stored division name
+		$("select[name='districtId']").val(settings.sAASPDivNum)
+	}
+}
+
 function disableTimeout(settings) {
 	// We may need to periodically call tickleServer(); (from mss common.js) to keep the server up to date
 
@@ -290,7 +301,7 @@ function overrideTimeout(settings) {
 
 function showItWorksBanner(settings) {
 	logMsg("It works!");
-	$("body").before("<div style=\"font-size: 8pt; margin: 0; padding: 0; width: 100%; background-color: yellow; color: black;text-align: center;font-family: sans-serif;\">MySchoolSask Enhancement Suite is able to modify the contents of this page.</div>");
+	$("body").before("<div style=\"z-index:1; position: absolute; font-size: 8pt; margin: 0; padding: 0; width: 100%; background-color: yellow; color: black;text-align: center;font-family: sans-serif;\">MySchoolSask Enhancement Suite is able to modify the contents of this page.</div>");
 }
 
 function enableShiftClickCheckboxes(settings) {
@@ -306,7 +317,12 @@ function enableShiftClickCheckboxes(settings) {
 }
 
 function onSettingsLoaded(settings) {
-	// Don't load any of this stuff on the login screen
+	
+	// Check if we should show the "It Works" banner
+	if (settings.lShowItWorksBanner == true) {
+		showItWorksBanner(settings);
+	}
+
 	if (!document.title.toLowerCase().includes("log on")) {
 
 		// Check if we should adjust the timeout
@@ -314,11 +330,6 @@ function onSettingsLoaded(settings) {
 			disableTimeout(settings);
 		} else if (settings.sTimeoutOverrideMode == "override") {
 			overrideTimeout(settings);
-		}
-
-		// Check if we should show the "It Works" banner
-		if (settings.lShowItWorksBanner == true) {
-			showItWorksBanner(settings);
 		}
 
 		if (settings.lHideYOGRow == true) {
@@ -333,11 +344,18 @@ function onSettingsLoaded(settings) {
 	 	// Check if we should enable shift+clicking checkboxes
 	 	if (settings.lEnableCheckboxMultiSelect == true) {
 	 		enableShiftClickCheckboxes(settings);
-	 	}
-
-
+		 }
+		 
  	} else {
- 		logMsg("Supressing all enhancements on login screen");
+
+		// Check if we should set the AASP default
+		if (settings.lSetAASPDropdown == true) {
+			setAASPDefault(settings);
+			// This will automatically click the AASP button but puts the user in a loop when
+			// they try to log out.
+			//$("a[href='javascript:gotoSSO()']")[0].click();
+		}
+		
  	}
 }
 
