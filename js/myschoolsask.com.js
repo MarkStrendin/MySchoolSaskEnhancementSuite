@@ -58,8 +58,8 @@ function insertYOGGradeSelector(settings) {
 				"        var newSelectedIndex = 0;" +
 				"        var d = new Date(); " +
 				"        var currentSchoolYear = d.getFullYear();" +
-				"        var curMonth = d.getMonth; " +
-				"        if ((curMonth >= 7) && (curMonth <= 11)) { newYog + 1; }" +
+				"        var curMonth = d.getMonth(); " +
+				"        if ((curMonth >= 7) && (curMonth <= 11)) { newYog = newYog + 1; }" +
 				"        switch(yogValueInt) {" +
 				"          case (currentSchoolYear) : " +
 				"            /* Grade 12 */ " +
@@ -131,8 +131,8 @@ function insertYOGGradeSelector(settings) {
 				" var form = document.forms['" + formName + "'];" +
 				" var d = new Date(); " +
 				" var newYog = d.getFullYear();" +
-				" var curMonth = d.getMonth; " +
-				" if ((curMonth >= 7) && (curMonth <= 11)) { newYog + 1; }" +
+				" var curMonth = d.getMonth(); " +
+				" if ((curMonth >= 7) && (curMonth <= 11)) { newYog = newYog + 1; }" +
 				" var yogYearAdjust = 0; " +
 				" switch(form.elements[\"mssesGradeDropdown\"].value) { " +
 				"   case \"12\" : " +
