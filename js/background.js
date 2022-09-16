@@ -1,13 +1,3 @@
-/*
- * ====================================================================
- *
- * Living Sky School Division
- *
- * Copyright (c) 2019 Living Sky School Division
- * All rights reserved.
- *
- * ====================================================================
- */
 
 var MSSES_VERSION = chrome.runtime.getManifest().version
 

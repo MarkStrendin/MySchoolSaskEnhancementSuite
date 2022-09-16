@@ -1,14 +1,3 @@
-/*
- * ====================================================================
- *
- * Living Sky School Division
- *
- * Copyright (c) 2019 Living Sky School Division
- * All rights reserved.
- *
- * ====================================================================
- */
-
 function logMsg(msg) {
 	console.log("MSSES: " + msg);
 }
@@ -230,13 +219,6 @@ function setAASPDefault(settings) {
 	}
 }
 
-function disableTimeout(settings) {
-	// We may need to periodically call tickleServer(); (from mss common.js) to keep the server up to date
-
-	// Inject code into every page that resets the timeout at an interval
-	logMsg("Disabling timeout");
-	$("body").before("<script language=\"javascript\">setInterval(function() { var d = new Date(); getParentX2Window().lastUserEvent = d.getTime(); }, 5000);</script>");
-}
 
 function overrideTimeout(settings) {
 	// Create our own activity timer
@@ -323,15 +305,8 @@ function onSettingsLoaded(settings) {
 		showItWorksBanner(settings);
 	}
 
-	if (!document.title.toLowerCase().includes("log on")) {
-
-		// Check if we should adjust the timeout
-		if (settings.sTimeoutOverrideMode == "disabletimeout") {
-			disableTimeout(settings);
-		} else if (settings.sTimeoutOverrideMode == "override") {
-			overrideTimeout(settings);
-		}
-
+	if (!document.title.toLowerCase().includes("log on")) 
+	{
 		if (settings.lHideYOGRow == true) {
 			hideYOGFields(settings);
 		}

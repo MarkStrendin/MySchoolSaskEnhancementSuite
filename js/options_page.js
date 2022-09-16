@@ -1,78 +1,7 @@
-/*
- * ====================================================================
- *
- * Living Sky School Division
- *
- * Copyright (c) 2019 Living Sky School Division
- * All rights reserved.
- *
- * ====================================================================
- */
 
 function logMsg(msg) {
   console.log("MSSES: " + msg);
 }
-
-function enableTimeoutOptions() {
-  $("#rdbNewTimeoutLength_60").prop("disabled", false);
-  $("#rdbNewTimeoutLength_120").prop("disabled", false);
-  $("#rdbNewTimeoutLength_240").prop("disabled", false);
-  $("#rdbNewTimeoutLength_360").prop("disabled", false);
-}
-
-function disableTimeoutOptions() {
-  $("#rdbNewTimeoutLength_60").prop("disabled", true);
-  $("#rdbNewTimeoutLength_120").prop("disabled", true);
-  $("#rdbNewTimeoutLength_240").prop("disabled", true);
-  $("#rdbNewTimeoutLength_360").prop("disabled", true);
-}
-
-$("#rdbNewTimeoutLength_60").on('change', function() {
-  chrome.storage.sync.set({
-    iNewTimeoutLength: 60
-  });
-});
-
-$("#rdbNewTimeoutLength_120").on('change', function() {
-  chrome.storage.sync.set({
-    iNewTimeoutLength: 120
-  });
-});
-
-$("#rdbNewTimeoutLength_240").on('change', function() {
-  chrome.storage.sync.set({
-    iNewTimeoutLength: 240
-  });
-});
-
-$("#rdbNewTimeoutLength_360").on('change', function() {
-  chrome.storage.sync.set({
-    iNewTimeoutLength: 360
-  });
-});
-
-$("#rdbTimeoutOverrideMode_Disable").on('change', function() {
-  disableTimeoutOptions();
-  chrome.storage.sync.set({
-    sTimeoutOverrideMode: "disabletimeout"
-  });
-});
-
-$("#rdbTimeoutOverrideMode_Override").on('change', function() {
-  enableTimeoutOptions();
-
-  chrome.storage.sync.set({
-    sTimeoutOverrideMode: "override"
-  });
-});
-
-$("#rdbTimeoutOverrideMode_None").on('change', function() {
-  disableTimeoutOptions();
-  chrome.storage.sync.set({
-    sTimeoutOverrideMode: "nooverride"
-  });
-
-});
 
 $("#chkShowItWorks").on('change', function() {
   chrome.storage.sync.set({
@@ -227,74 +156,7 @@ function onSyncSettingsLoaded(settings) {
   // AASP 
   document.querySelector("#chkEnableAASPSelect").checked = (settings.lSetAASPDropdown || false);
   document.querySelector("#txtAASPSchoolDiv").value = (settings.sAASPDivNum || "");
-
-  // Session timeouts
-  switch(settings["sTimeoutOverrideMode"]) {
-    case 'disabletimeout':
-      document.querySelector("#rdbTimeoutOverrideMode_None").checked = false;
-      document.querySelector("#rdbTimeoutOverrideMode_Override").checked = false;
-      document.querySelector("#rdbTimeoutOverrideMode_Disable").checked = true;
-      disableTimeoutOptions();
-      break;
-    case 'override':
-      document.querySelector("#rdbTimeoutOverrideMode_None").checked = false;
-      document.querySelector("#rdbTimeoutOverrideMode_Override").checked = true;
-      document.querySelector("#rdbTimeoutOverrideMode_Disable").checked = false;
-      enableTimeoutOptions();
-      break;
-    case 'nooverride':
-      document.querySelector("#rdbTimeoutOverrideMode_None").checked = true;
-      document.querySelector("#rdbTimeoutOverrideMode_Override").checked = false;
-      document.querySelector("#rdbTimeoutOverrideMode_Disable").checked = false;
-      disableTimeoutOptions();
-      break;
-    default:
-      document.querySelector("#rdbTimeoutOverrideMode_None").checked = true;
-      document.querySelector("#rdbTimeoutOverrideMode_Override").checked = false;
-      document.querySelector("#rdbTimeoutOverrideMode_Disable").checked = false;
-      disableTimeoutOptions();
-      break;
-  }
-
-  // Session timeout values
-  switch(settings["iNewTimeoutLength"]) {
-    case 30 :
-      document.querySelector("#rdbNewTimeoutLength_60").checked = false;
-      document.querySelector("#rdbNewTimeoutLength_120").checked = false;
-      document.querySelector("#rdbNewTimeoutLength_240").checked = false;
-      document.querySelector("#rdbNewTimeoutLength_360").checked = false;
-      break;
-    case 60 :
-      document.querySelector("#rdbNewTimeoutLength_60").checked = true;
-      document.querySelector("#rdbNewTimeoutLength_120").checked = false;
-      document.querySelector("#rdbNewTimeoutLength_240").checked = false;
-      document.querySelector("#rdbNewTimeoutLength_360").checked = false;
-      break;
-    case 120 :
-      document.querySelector("#rdbNewTimeoutLength_60").checked = false;
-      document.querySelector("#rdbNewTimeoutLength_120").checked = true;
-      document.querySelector("#rdbNewTimeoutLength_240").checked = false;
-      document.querySelector("#rdbNewTimeoutLength_360").checked = false;
-      break;
-    case 240 :
-      document.querySelector("#rdbNewTimeoutLength_60").checked = false;
-      document.querySelector("#rdbNewTimeoutLength_120").checked = false;
-      document.querySelector("#rdbNewTimeoutLength_240").checked = true;
-      document.querySelector("#rdbNewTimeoutLength_360").checked = false;
-      break;
-    case 360 :
-      document.querySelector("#rdbNewTimeoutLength_60").checked = false;
-      document.querySelector("#rdbNewTimeoutLength_120").checked = false;
-      document.querySelector("#rdbNewTimeoutLength_240").checked = false;
-      document.querySelector("#rdbNewTimeoutLength_360").checked = true;
-      break;
-    default :
-      document.querySelector("#rdbNewTimeoutLength_60").checked = false;
-      document.querySelector("#rdbNewTimeoutLength_120").checked = false;
-      document.querySelector("#rdbNewTimeoutLength_240").checked = false;
-      document.querySelector("#rdbNewTimeoutLength_360").checked = false;
-      break;
-  }
+ 
 }
 
 function onLocalSettingsLoaded(settings) {
