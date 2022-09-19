@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <style type="text/css">
       body {
-        background-color: rgb(100,125,100);
+        background-color: #2A4849;
       }
 
       h1 {
@@ -28,7 +28,7 @@
         padding: 25px;
         padding-top: 0px;
         margin: 10px;
-        border: 1px solid rgba(0,0,25,0.9);
+        border: 2px solid rgba(0,0,25,0.6);
         margin-left: auto;
         margin-right: auto;
         margin-top: 25px;
@@ -45,11 +45,11 @@
       }
 
       .new {
-        vertical-align: super;                
+        vertical-align: super;
         font-size: 5pt;
         font-style: normal;
         color: white;
-        background-color: red;        
+        background-color: red;
         padding: 5px;
         border-radius: 5px;
       }
@@ -93,22 +93,28 @@
       }
 
     </style>
-    <script type="text/javascript" src="/thirdparty/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/thirdparty/jquery-3.6.1.min.js"></script>
   </head>
 
   <body>
   <div id="pageContainer">
-    <form id="options_form">      
+    <form id="options_form">
+    <br/>
+      <div style="text-align: center;">
+        <img src="/img/msst_128.png" style="padding: 10px; margin: 5px; border-radius: 12px; background-color: #006B35;">
+      </div>
     	<h1> MySchoolSask Enhancement Suite <label id="lblExtensionVersion"></label></h1>
-        
+
         <div id="newVersionMessage" class="topInfoBox" style="display: none;">
           <p>
             <b>MySchoolSask Enhancement Suite has been updated automatically</b>
           </p>
           <p>
-            New features for version 0.9</label>:
+            New features for version 1.0</label>:
             <ul>
+              <li>Updated to new browser extension manifest version, to ensure this addon works after January 2023</li>
               <li>This addon can no longer be used to extend login session timeouts</li>
+              <li>Removed features relating to the "YOG/Year Of Graduation" helpers, as these features are now built into MSS</li>
             </ul>
             View the full changelog <a href="https://github.com/LivingSkySchoolDivision/MySchoolSaskEnhancementSuite/releases">here</a>.
           </p>
@@ -119,53 +125,43 @@
             <b>Thanks for installing MySchoolSask Enhancement Suite!</b>
           </p>
         </div>
-
-      <div class="optionsSection">
-      <h2>About this extension</h2>     
-      <p>
-        This browser extension adds usability enhancements to the MySchoolSask web application.
-      </p> 
-        <ul style="font-size: 10pt;">
-          <li>This extension and it's authors are not directly affiliated with MySchoolSask.</li>
-          <li>This extension is not endorsed or approved by MySchoolSask.</li>          
-          <li>This extension <b>cannot</b> give you access to any data or features of MySchoolSask that you wouldn't normally have.</li>
-          <li>This extension is <a  target="_BLANK" href="https://github.com/LivingSkySchoolDivision/MySchoolSaskEnhancementSuite">open source</a></li>
-          <li>This extension <b>does not</b> collect or track anything from you or your web browser.</li>          
-        </ul>       
-      </p>
-      <p>
+      <p style="text-align: center;">
         <a target="_BLANK" href="https://github.com/LivingSkySchoolDivision/MySchoolSaskEnhancementSuite" class="aboutButton">View Source Code</a>
         <a target="_BLANK" href="https://github.com/LivingSkySchoolDivision/MySchoolSaskEnhancementSuite/releases" class="aboutButton">Changelog</a>
         <a target="_BLANK" href="https://github.com/LivingSkySchoolDivision/MySchoolSaskEnhancementSuite/issues" class="aboutButton">Issue tracker</a>
-      </p>        
+      </p>
+
+      <div class="optionsSection">
+      <h2>About this browser extension</h2>
+      <p>
+        This browser extension adds usability enhancements to the MySchoolSask web application.
+      </p>
+        <ul style="font-size: 10pt;">
+          <li>This extension and it's authors are not directly affiliated with MySchoolSask.</li>
+          <li>This extension is not endorsed or approved by MySchoolSask.</li>
+          <li>This extension <b>cannot</b> give you access to any data or features of MySchoolSask that you wouldn't normally have.</li>
+          <li>This extension is <a  target="_BLANK" href="https://github.com/LivingSkySchoolDivision/MySchoolSaskEnhancementSuite">open source</a></li>
+          <li>This extension <b>does not</b> collect or track anything from you or your web browser.</li>
+        </ul>
+      </p>
       </div>
 
-      <div class="optionsSection">     
-
-        <div class="optionsSection">
-        <h2>Year of Graduation (YOG)</h2>
-        <p>
-          <input type="checkbox" id="chkShowGradeDropdownOnRegWizard"> Show a grade selector on student registration wizards
-          <br/>
-          <input style="margin-bottom: 0; padding-bottom: 0;" type="checkbox" id="chkHideYearofGraduationFields" > Also hide the "Year of Graduation" fields from registration wizards (only show the grade selector).
-        </p>
-        </div>
-
+      <div class="optionsSection">
         <div class="optionsSection">
         <h2>Checkbox multi-select with shift+click</h2>
         <p>
           This extension can enable checkbox multi-select. Check one checkbox in a list, then shift+click another checkbox, and all checkboxes between the two will also get checked.
         </p>
         <p>
-          <input type="checkbox" id="chkEnableCheckboxMultiSelect" > Enable checkbox multi-select with shift+click                    
+          <input type="checkbox" id="chkEnableCheckboxMultiSelect" > Enable checkbox multi-select with shift+click
         </p>
         </div>
 
         <div class="optionsSection">
-          <h2>AASP</h2>
+          <h2>Login page / AASP / Single Sign-On</h2>
           <p>
             Automatically choose the specified school division from the AASP dropdown list.  Enter the 3 digit school division number with a leading zero if necessary
-          </p> 
+          </p>
           <p>
             <input type="checkbox" id="chkEnableAASPSelect" > Enable default AASP selection <br /><br />
             School Division #: <input type="text" id="txtAASPSchoolDiv">
@@ -178,7 +174,7 @@
           <div id="divDebugOptions" style="display: none;">
             <input type="checkbox" id="chkShowItWorks" > Show "It Works" banner at the top of affected web pages
             <br/><br/>
-            <input type="button" id="btnClearLocalStorage" value="Clear all extension settings and data" /> 
+            <input type="button" id="btnClearLocalStorage" value="Clear all extension settings and data" />
             <input type="button" id="btnResetSettingsToDefault" value="Reset all settings to defaults" />
             <br/><br/>
             <div style="color: rgba(0,0,0,0.3);">

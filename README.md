@@ -13,6 +13,13 @@ This addon offers the following enhancements, each toggleable from this addon's 
 * Provides a grade selector drop-down box on student registration wizards, as an alternative to having to calculate the year of graduation
 * Allows the user to quickly check multiple checkboxes by clicking one, then shift+clicking another, having each checkbox between the two get checked automatically
 
+# Browser Compatibility
+| Browser | Last version tested with |
+|:--------|:------------------------:|
+| Google Chrome | 105.0.5195.125 |
+| Microsoft Edge | 105.0.1343.42 |
+| Mozilla Firefox | *No current Firefox support* |
+
 # How to install
 ## Chrome
 Add this extension to your browser from the Chrome Web Store: https://chrome.google.com/webstore/detail/myschoolsask-enhancement/gnelcbacckaepbjnbgmbfbemdcefffbj
@@ -21,4 +28,4 @@ Add this extension to your browser from the Chrome Web Store: https://chrome.goo
 Add this extension to your browser from the Chrome Web Store: https://chrome.google.com/webstore/detail/myschoolsask-enhancement/gnelcbacckaepbjnbgmbfbemdcefffbj
 
 ## Firefox
-Manually download the addon from this repository's *releases* page: https://github.com/LivingSkySchoolDivision/MySchoolSaskEnhancementSuite/releases/latest. You will be prompted to install once it's downloaded.
+__Note:__ Firefox support is a work in progress.

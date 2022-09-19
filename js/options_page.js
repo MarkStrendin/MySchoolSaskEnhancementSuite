@@ -9,23 +9,6 @@ $("#chkShowItWorks").on('change', function() {
   });
 });
 
-$("#chkShowGradeDropdownOnRegWizard").on('change', function() {
-  var showGradeDropdown = document.querySelector("#chkShowGradeDropdownOnRegWizard").checked || false;
-  chrome.storage.sync.set({
-    lShowYOGGradeDropdowns: showGradeDropdown
-  });
-
-  $("#chkHideYearofGraduationFields").prop("disabled", !showGradeDropdown);
-
-});
-
-$("#chkHideYearofGraduationFields").on('change', function() {
-  var hideYOGRow = document.querySelector("#chkHideYearofGraduationFields").checked || false;
-  chrome.storage.sync.set({
-    lHideYOGRow: hideYOGRow
-  });
-});
-
 $("#chkEnableAASPSelect").on('change', function() {
   chrome.storage.sync.set({
     lSetAASPDropdown: document.querySelector("#chkEnableAASPSelect").checked
@@ -61,14 +44,10 @@ $("#btnClearLocalStorage").on('click', function() {
 $("#btnResetSettingsToDefault").on('click', function() {
   chrome.storage.sync.clear();
   chrome.storage.sync.set({
-        lShowItWorksBanner: false,
-        iNewTimeoutLength: 1800000,
-        sTimeoutOverrideMode: "nooverride",
-        lShowYOGGradeDropdowns: true,
-        lHideYOGRow: false,
-        lEnableCheckboxMultiSelect: true,
-        lSetAASPDropdown: false,
-        sAASPDivNum: ""
+    lShowItWorksBanner: false,
+    lEnableCheckboxMultiSelect: true,
+    lSetAASPDropdown: false,
+    sAASPDivNum: ""
   });
   location.reload();
 });
@@ -83,63 +62,34 @@ function checkDefaultSettings(settings) {
   if (settings.lShowItWorksBanner == null) {
     logMsg("Defaulting new setting \"lShowItWorksBanner\" to false");
     chrome.storage.sync.set({
-        lShowItWorksBanner: false
-      });
-  }
-
-  if (settings.iNewTimeoutLength == null) {
-    logMsg("Defaulting new setting \"iNewTimeoutLength\" to 1800000");
-    chrome.storage.sync.set({
-        iNewTimeoutLength: 1800000
-      });
-  }
-
-  if (settings.sTimeoutOverrideMode == null) {
-    logMsg("Defaulting new setting \"sTimeoutOverrideMode\" to nooverride");
-    chrome.storage.sync.set({
-        sTimeoutOverrideMode: "nooverride"
-      });
-  }
-
-  if (settings.lShowYOGGradeDropdowns == null) {
-    logMsg("Defaulting new setting \"lShowYOGGradeDropdowns\" to true");
-    chrome.storage.sync.set({
-        lShowYOGGradeDropdowns: true
-      });
-  }
-
-  if (settings.lHideYOGRow == null) {
-    logMsg("Defaulting new setting \"lHideYOGRow\" to false");
-    chrome.storage.sync.set({
-        lHideYOGRow: false
-      });
+      lShowItWorksBanner: false
+    });
   }
 
   if (settings.lEnableCheckboxMultiSelect == null) {
     logMsg("Defaulting new setting \"lEnableCheckboxMultiSelect\" to true");
     chrome.storage.sync.set({
-        lEnableCheckboxMultiSelect: true
-      });
+      lEnableCheckboxMultiSelect: true
+    });
   }
 
   if (settings.lSetAASPDropdown == null) {
     logMsg("Defaulting new setting \"lSetAASPDropdown\" to false");
     chrome.storage.sync.set({
-        lSetAASPDropdown: false
-      });
+      lSetAASPDropdown: false
+    });
   }
 
   if (settings.sAASPDivNum == null) {
     logMsg("Defaulting new setting \"sAASPDivNum\" to ''");
     chrome.storage.sync.set({
-        sAASPDivNum: ""
-      });
+      sAASPDivNum: ""
+    });
   }
 }
 
 /// Visually updates the fields on the options page to match the stored settings, or the defauls
 function onSyncSettingsLoaded(settings) {
-  console.log(settings);
   checkDefaultSettings(settings);
 
   // Debug banner
@@ -148,11 +98,6 @@ function onSyncSettingsLoaded(settings) {
   // Checkbox multiselect
   document.querySelector("#chkEnableCheckboxMultiSelect").checked = (settings.lEnableCheckboxMultiSelect || false);
 
-  // YOG
-  document.querySelector("#chkShowGradeDropdownOnRegWizard").checked = (settings.lShowYOGGradeDropdowns || false);
-  document.querySelector("#chkHideYearofGraduationFields").checked = (settings.lHideYOGRow || false);
-  document.querySelector("#chkHideYearofGraduationFields").disabled = !settings.lShowYOGGradeDropdowns;
-
   // AASP 
   document.querySelector("#chkEnableAASPSelect").checked = (settings.lSetAASPDropdown || false);
   document.querySelector("#txtAASPSchoolDiv").value = (settings.sAASPDivNum || "");
@@ -160,7 +105,6 @@ function onSyncSettingsLoaded(settings) {
 }
 
 function onLocalSettingsLoaded(settings) {
-  console.log(settings);
   var isFirstRunText = "Yes";
   if (settings.hascompletedfirstrun == true) {
     isFirstRunText = "No";
